@@ -7,6 +7,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { AuthService } from '../auth-service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -15,6 +16,12 @@ import { AuthService } from '../auth-service/auth.service';
 })
 export class SignUpPageComponent implements OnInit {
   signUpForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   passwordMatchValidator: ValidatorFn = (
     control: AbstractControl
@@ -27,13 +34,23 @@ export class SignUpPageComponent implements OnInit {
       confirmPassword &&
       password.value !== confirmPassword.value
     ) {
-      return { passwordMismatch: true };
+      confirmPassword.setErrors({ passwordMismatch: true });
+    }
+
+    if (
+      password &&
+      password.value &&
+      confirmPassword &&
+      confirmPassword.value
+    ) {
+      return password.value === confirmPassword.value
+        ? null
+        : { passwordMismatch: true };
     }
 
     return null;
   };
 
-  // Custom validator to disallow consecutive spaces
   noConsecutiveSpacesValidator: ValidatorFn = (
     control: AbstractControl
   ): { [key: string]: boolean } | null => {
@@ -47,37 +64,29 @@ export class SignUpPageComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    // this.signUpForm = this.fb.group({
-    //   name: [
-    //     '',
-    //     [
-    //       Validators.required,
-    //       Validators.minLength(3),
-    //       this.noConsecutiveSpacesValidator,
-    //     ],
-    //   ],
-    //   phone: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: ['', Validators.required],
-    //   confirmPassword: ['', Validators.required],
-    // });
     this.signUpForm = this.fb.group(
       {
         name: ['', [Validators.required, this.noConsecutiveSpacesValidator]],
-        phone: ['', Validators.required],
+        phone: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6-9]\d{9}$/
+            ),
+          ],
+        ],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(5)]],
         confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordMatchValidator }
     );
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
-
   signUp() {
-    console.log(this.signUpForm.value);
-
     this.authService.signUp(this.signUpForm.value);
+    this.signUpForm.reset();
+    this.router.navigate(['..', 'phone-otp']);
   }
 }

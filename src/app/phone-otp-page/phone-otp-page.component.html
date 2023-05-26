@@ -1,1 +1,23 @@
-<p>phone-otp-page works!</p>
+<div class="container">
+  <h1>OTP Verification</h1>
+
+  <p>An OTP has been sent to {{user.phone}}</p>
+
+  <form [formGroup]="otpForm" (ngSubmit)="submitForm()">
+    <label for="otp">Enter OTP:</label>
+    <input type="text" id="otp" formControlName="otp">
+
+    <div class="timer" *ngIf="timeRemaining !== 0">
+      <span>{{ timeRemaining }}</span> seconds remaining
+    </div>
+
+    <div *ngIf="otpForm.get('otp').errors && otpForm.get('otp').touched" style="color: red;">
+      <small *ngIf="otpForm.get('otp').hasError('required')">OTP is required</small>
+      <small *ngIf="otpForm.get('otp').hasError('consecutiveSpaces')">Spaces are not allowed!</small>
+    </div>
+
+    <button type="submit" [disabled]="otpForm.invalid">Submit</button>
+
+    <a *ngIf="resendLinkVisible === true" (click)="resendOTP()">Resend OTP</a>
+  </form>
+</div>

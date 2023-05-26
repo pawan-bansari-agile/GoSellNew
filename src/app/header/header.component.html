@@ -31,6 +31,12 @@
         </li>
         <li><a>Place your add!</a></li>
         <li><a>Get Started!</a></li>
+        <li class="dropdown" appDropDown *ngIf="user && user.verified">
+          <a class="dropdown-toggle" role="button">Profile Info <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="change-password">Change Password</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

@@ -45,6 +45,7 @@
         <input type="number" formControlName="phone" required>
         <div *ngIf="signUpForm.get('phone').invalid && signUpForm.get('phone').touched">
           <small *ngIf="signUpForm.get('phone').errors?.required">Phone is required.</small>
+          <small *ngIf="signUpForm.get('phone').errors?.pattern">Phone is incorrect.</small>
         </div>
       </div>
       <div>
@@ -52,6 +53,7 @@
         <input type="password" formControlName="password" required>
         <div *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched">
           <small *ngIf="signUpForm.get('password').errors?.required">Password is required.</small>
+          <small *ngIf="signUpForm.get('password').errors?.minlength">Set a minimum 5 characters long password.</small>
         </div>
       </div>
       <div>
@@ -59,7 +61,7 @@
         <input type="password" formControlName="confirmPassword" required>
         <div *ngIf="signUpForm.get('confirmPassword').invalid && signUpForm.get('confirmPassword').touched">
           <small *ngIf="signUpForm.get('confirmPassword').errors?.required">Confirm Password is required.</small>
-          <small *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword').touched">
+          <small *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword').value !== ''">
             Passwords do not match.
           </small>
         </div>
@@ -68,8 +70,13 @@
         Sign Up
       </button>
     </form>
+    <hr>
+    <div>
+      Already have an account? <a [routerLink]="['..','login']">Sign In</a>
+    </div>
   </div>
 </div>
+
 
 
 

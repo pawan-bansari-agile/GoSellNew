@@ -14,6 +14,7 @@ import { ResetPasswordPageComponent } from './reset-password-page/reset-password
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { DropDownDirective } from './directives/dropdown.directive';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DropDownDirective } from './directives/dropdown.directive';
     ResetPasswordPageComponent,
     HeaderComponent,
     DropDownDirective,
+    HomepageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

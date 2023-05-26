@@ -8,6 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { PhoneOtpPageComponent } from './phone-otp-page/phone-otp-page.component';
 import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   { path: '', component: InitialPageComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordPageComponent },
   { path: 'forgot-password', component: ForgotPasswordPageComponent },
   { path: 'reset-password', component: ResetPasswordPageComponent },
+  { path: 'home-page', component: HomepageComponent },
 ];
 
 @NgModule({
