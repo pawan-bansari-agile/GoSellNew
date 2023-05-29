@@ -16,7 +16,15 @@ export class ResetPasswordPageComponent implements OnInit {
   ngOnInit() {
     this.resetForm = this.formBuilder.group(
       {
-        newPassword: ['', [Validators.required, Validators.minLength(5)]],
+        newPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+            ),
+          ],
+        ],
         confirmPassword: ['', Validators.required],
       },
       { validators: this.passwordMatchValidator }

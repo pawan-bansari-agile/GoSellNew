@@ -37,12 +37,7 @@ export class SignUpPageComponent implements OnInit {
       confirmPassword.setErrors({ passwordMismatch: true });
     }
 
-    if (
-      password &&
-      password.value &&
-      confirmPassword &&
-      confirmPassword.value
-    ) {
+    if (password?.value && confirmPassword && confirmPassword.value) {
       return password.value === confirmPassword.value
         ? null
         : { passwordMismatch: true };
@@ -77,7 +72,15 @@ export class SignUpPageComponent implements OnInit {
           ],
         ],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(5)]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+            ),
+          ],
+        ],
         confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordMatchValidator }

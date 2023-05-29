@@ -61,8 +61,6 @@ export class EmailOtpPageComponent implements OnInit {
     this.router.navigate(['..', 'home-page']);
   }
 
-  resendOTP() {}
-
   startTimer() {
     const timer = setInterval(() => {
       this.timeRemaining--;
