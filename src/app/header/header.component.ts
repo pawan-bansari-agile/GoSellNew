@@ -9,12 +9,21 @@ import { AuthService } from '../auth-service/auth.service';
 })
 export class HeaderComponent implements OnInit {
   user: User;
-
+  selectedLanguage: string = 'En';
+  isDarkMode: boolean = false;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.userEmittor.subscribe((user) => {
       this.user = user;
     });
+  }
+
+  changeLanguage(languageCode: string) {
+    this.selectedLanguage = languageCode;
+  }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
   }
 }
