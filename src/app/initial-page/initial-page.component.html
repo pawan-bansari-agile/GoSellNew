@@ -2,9 +2,10 @@
   <div class="left-side">
   </div>
   <div class="right-side">
-    <img src="assets/VectorOgLogo.png" alt="Logo" style="width: 100px; height: 100px;">
-    <p style="font-weight: bold; font-family: Montserrat, Arial, sans-serif;  text-align: right; margin-left: 10px; font-size: 28.5455px; line-height: 36px; letter-spacing: 0.05em; color: #434343;">Car Connections</p>
-    <button class="btn btn-primary" style="font-family: 'Fira Sans', Arial, sans-serif;" routerLink="sign-up">Signup</button>
-    <button class="btn btn-secondary" style="font-family: 'Fira Sans', Arial, sans-serif;" routerLink="login">Login</button>
+      <img *ngIf="display" src="assets/VectorOgLogo.png" alt="Logo" style="width: 100px; height: 100px;">
+      <p *ngIf="display" style="font-weight: bold; font-family: Montserrat, Arial, sans-serif;  text-align: right; margin-left: 10px; font-size: 28.5455px; line-height: 36px; letter-spacing: 0.05em; color: #434343;">Car Connections</p>
+      <button *ngIf="display" (click)="toDisplay()" class="btn btn-primary" style="font-family: 'Fira Sans', Arial, sans-serif;" routerLink="sign-up">Signup</button>
+      <button *ngIf="display" (click)="toDisplay()" class="btn btn-secondary" style="font-family: 'Fira Sans', Arial, sans-serif;" routerLink="login">Login</button>
+    <router-outlet></router-outlet>
   </div>
 </div>

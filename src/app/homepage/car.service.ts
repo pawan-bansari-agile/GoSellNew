@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Car } from '../homepage/car.model';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CarsService {
@@ -52,7 +53,14 @@ export class CarsService {
     ),
   ];
 
+  filteredCarsSubject: Subject<Car[]> = new Subject<Car[]>();
+  filteredCars$ = this.filteredCarsSubject.asObservable();
+
   getCars() {
     return this.cars.slice();
+  }
+
+  updateFilteredCars(filteredCars: Car[]) {
+    this.filteredCarsSubject.next(filteredCars);
   }
 }

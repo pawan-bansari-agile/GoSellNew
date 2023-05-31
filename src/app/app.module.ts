@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { DropDownDirective } from './directives/dropdown.directive';
 import { HomepageComponent } from './homepage/homepage.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     HeaderComponent,
     DropDownDirective,
     HomepageComponent,
+    FilterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

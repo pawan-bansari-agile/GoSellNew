@@ -11,9 +11,14 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', component: InitialPageComponent },
-  { path: 'sign-up', component: SignUpPageComponent },
-  { path: 'login', component: LoginPageComponent },
+  {
+    path: '',
+    component: InitialPageComponent,
+    children: [
+      { path: 'sign-up', component: SignUpPageComponent },
+      { path: 'login', component: LoginPageComponent },
+    ],
+  },
   { path: 'phone-otp', component: PhoneOtpPageComponent },
   { path: 'email-otp', component: EmailOtpPageComponent },
   { path: 'change-password', component: ChangePasswordPageComponent },
